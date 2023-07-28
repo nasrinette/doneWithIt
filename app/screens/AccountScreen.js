@@ -1,9 +1,8 @@
-import { StyleSheet, Text, FlatList, View } from 'react-native'
-import React from 'react'
-import ListItem from "../components/ListItem.js";
-import IconList from "../components/IconList.js";
-import colors from '../config/colors.js';
-import ListItemSeparator from '../components/ListItemSeparator.js'
+import React from "react";
+import { StyleSheet, View, FlatList } from "react-native";
+import { ListItem, ListItemSeparator } from "../components/lists";
+import colors from "../config/colors";
+import IconList from "../components/IconList";
 
 const listInfo = [
     {

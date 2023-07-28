@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
 
     },
     cardText: {
-        padding: 17,
+        padding: 15,
     }
 
 })
