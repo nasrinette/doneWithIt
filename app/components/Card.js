@@ -8,8 +8,7 @@ import AppText from "../components/AppText.js";
 export default function Card({title='title', subTitle="subtitle", image=require('../assets/jacket.jpg')}) {
   return (
     <View style={styles.card} >
-        <Image
-            
+        <Image      
             style={styles.cardPic} 
             source={image}
         />
@@ -27,10 +26,11 @@ const styles = StyleSheet.create({
     card: {
         backgroundColor: '#fff',
         borderRadius: 20,
+        marginVertical: 15,
     },
     cardPic:{
         width: '100%',
-        height: 350,
+        height: 250,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
 

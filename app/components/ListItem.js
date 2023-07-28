@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
 import React from 'react'
 import AppText from "../components/AppText.js";
 import colors from '../config/colors.js';
 
 
-export default function ListItem({title='text', subTitle="subtitle", image=require('../assets/mosh.jpg')}) {
+export default function ListItem({title='text', subTitle="subtitle", onPress, image=require('../assets/mosh.jpg')}) {
   return (
+    <TouchableHighlight 
+    underlayColor={colors.gray}
+    onPress={onPress}>
     <View style={styles.list} >
     <Image
         
@@ -17,8 +20,8 @@ export default function ListItem({title='text', subTitle="subtitle", image=requi
         <AppText style={styles.subTit}>{subTitle}</AppText>
     </View>
     
-</View>
-    
+    </View>
+    </TouchableHighlight>
   )
 }
 

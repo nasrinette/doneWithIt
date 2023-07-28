@@ -21,11 +21,7 @@ function  ViewImageScreen(props) {
             resizeMode='contain'
             style={styles.picture} 
             source={require('../assets/chair.jpg')}
-        />
-        
-       
-
-           
+        />   
         </View>
     );
 }

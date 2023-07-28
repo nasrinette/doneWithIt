@@ -3,7 +3,7 @@ import React from 'react'
 import colors from '../config/colors'
 
 
-export default function Button({textBtn='text', onPress, colorBtn=colors.primary}) {
+export default function AppButton({textBtn='text', onPress, colorBtn=colors.primary}) {
   return (
     <TouchableOpacity style={[styles.button, {backgroundColor: colorBtn}]} onPress={onPress}>
             <Text style={styles.buttonText}>{textBtn}</Text>
