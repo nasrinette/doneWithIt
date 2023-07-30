@@ -9,6 +9,7 @@ import React from "react";
 import AppText from "../AppText.js";
 import colors from "../../config/colors.js";
 
+
 export default function ListItem({
   title = "text",
   subTitle = "subtitle",
@@ -23,6 +24,7 @@ export default function ListItem({
           <AppText style={styles.tit}>{title}</AppText>
           <AppText style={styles.subTit}>{subTitle}</AppText>
         </View>
+
       </View>
     </TouchableHighlight>
   );
