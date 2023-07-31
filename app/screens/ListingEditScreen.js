@@ -3,9 +3,11 @@ import React from 'react'
 
 import * as Yup from "yup";
 
+import colors from '../config/colors';
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, AppFormPicker, SubmitButton } from "../components/forms";
-import AppPicker from '../components/AppPicker';
+import CategoryPickerItem from '../components/CategoryPickerItem';
+import PickerItem from '../components/PickerItem';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -16,9 +18,18 @@ const validationSchema = Yup.object().shape({
 });
 
 const categories =[
-  {label: "Furniture", value: 1},
-  {label: "Clothing", value: 2},
-  {label:  "Camera", value: 3},
+  {label: "Furniture", value: 1, icon: 'lamp', backgroundColor: colors.primary},
+  {label: "Cars", value: 2, icon: 'car', backgroundColor: '#f89f56'},
+  {label:  "Cameras", value: 3, icon: 'camera', backgroundColor: '#fdd056'},
+  {label:  "Games", value: 4, icon: 'gamepad-variant', backgroundColor: '#64cc8b'},
+  {label:  "Clothing", value: 5, icon: 'shopping', backgroundColor: '#5abebb'},
+  {label:  "Sports", value: 6, icon: 'basketball', backgroundColor: '#59a8ef'},
+  {label:  "Movies & Music", value: 7, icon: 'music', backgroundColor: '#5180e4'},
+  {label:  "Books", value: 8, icon: 'book-open-variant', backgroundColor: '#9e73e3'},
+  {label:  "Other", value: 9, icon: 'crop-square', backgroundColor: '#7a8ca2'},
+
+
+
 ]
 
 
@@ -38,6 +49,7 @@ export default function ListingEditScreen() {
           autoCapitalize="none"
           autoCorrect={false}
           placeholder="Title"
+          width={300} 
         />
 
 
@@ -48,13 +60,16 @@ export default function ListingEditScreen() {
           autoCorrect={false}
           name="price"
           placeholder="Price"
-  
+          width={125}  
         />
         
         <AppFormPicker
           items={categories}
           name="category"
           placeholder="Category"
+          width={300} 
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
           />
 
         <AppFormField

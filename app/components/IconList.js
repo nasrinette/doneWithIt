@@ -7,7 +7,7 @@ function IconList({
   size = 35,
   backgroundColor = "#000",
   iconColor = "#fff",
-  text="My Listings"
+  text
 }) {
   return (
     <View style={{flexDirection:'row', padding: 15 }}>
@@ -22,9 +22,11 @@ function IconList({
       }} >
       <MaterialCommunityIcons name={name} color={iconColor} size={size * 0.5} />
     </View>
+    
+      {text &&
       <View style={{alignSelf: 'center', padding: 7,}}>
-        {text && <Text style={{fontWeight: 'bold'}}>{text}</Text>}
-      </View>
+         <Text style={{fontWeight: 'bold'}}>{text}</Text>
+      </View> }
     
     </View>
   );

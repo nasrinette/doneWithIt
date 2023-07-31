@@ -8,6 +8,7 @@ import {
 import React from "react";
 import AppText from "../AppText.js";
 import colors from "../../config/colors.js";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
 export default function ListItem({
@@ -21,10 +22,13 @@ export default function ListItem({
       <View style={styles.list}>
         <Image style={styles.listPic} source={image} />
         <View style={styles.listText}>
-          <AppText style={styles.tit}>{title}</AppText>
-          <AppText style={styles.subTit}>{subTitle}</AppText>
+          <AppText numberOfLines={1} style={styles.tit}>{title}</AppText>
+          <AppText numberOfLines={2} style={styles.subTit}>{subTitle}</AppText>
         </View>
-
+      <MaterialCommunityIcons 
+      name="chevron-right" 
+      size={25} 
+      color={colors.medium} />
       </View>
     </TouchableHighlight>
   );
@@ -34,6 +38,7 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: "row",
     padding: 17,
+    alignItems: 'center'
   },
   listPic: {
     width: 60,
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
   },
   listText: {
     margin: 10,
+    flex: 1,
   },
   tit: {
     fontSize: 16,
@@ -50,4 +56,5 @@ const styles = StyleSheet.create({
     color: colors.gray,
     fontSize: 14,
   },
+
 });

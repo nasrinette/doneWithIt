@@ -4,8 +4,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Modal,
-  Button,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -14,14 +14,15 @@ import Screen from "./Screen";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
 import AppButton from "./AppButton";
+import IconList from "./IconList";
 
-function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+function AppPicker({ icon, items, onSelectItem, placeholder, numberOfColumns, selectedItem, width='100%', PickerItemComponent=PickerItem }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, {width: width}]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -45,13 +46,17 @@ function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <AppButton title="Close" onPress={() => setModalVisible(false)} />
+          <TouchableOpacity onPress={() => setModalVisible(false)}>
+          <IconList name="close" size={55} backgroundColor="white" iconColor="black" />
+          </TouchableOpacity>
           <FlatList
+         
             data={items}
             keyExtractor={(item) => item.value.toString()}
+            numColumns={numberOfColumns}
             renderItem={({ item }) => (
-              <PickerItem
-                label={item.label}
+              <PickerItemComponent
+                item={item}
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item);
@@ -70,7 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
   },
