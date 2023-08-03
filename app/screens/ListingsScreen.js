@@ -34,7 +34,7 @@ export default function ListingsScreen() {
     
         <FlatList 
         data={listings}
-        keyExtractor={listings=> listings.id.toString()}
+        keyExtractor={item=> item.id.toString()}
         renderItem={({item})=>
             <Card 
             title={item.title}
