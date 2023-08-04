@@ -3,44 +3,40 @@ import React, { useRef } from 'react'
 import ImageInput from '../ImageInput'
 import Screen from '../Screen';
 
-export default function ImageInputList({ imageUris, onAddImage, onRemoveImage }) {  
-  const flatList = useRef();
+export default function ImageInputList({ imageUris= [], onAddImage, onRemoveImage, ...otherProps }) {  
+  const scrollView = useRef();
 
   return (
-    <Screen style={styles.container}> 
-      {imageUris.length > 0 && 
-      <FlatList
-      style={{flexGrow:0}}
-        ref={flatList}
-        onContentSizeChange={() => flatList.current.scrollToEnd()}
+    <View>
+      <ScrollView
+        ref={scrollView}
         horizontal
-        data={imageUris}
-        keyExtractor={(uri) => uri.toString()}
-        renderItem={({item: uri}) => (
-          <ImageInput imageUri={uri} 
-          onChangeImage={() => onRemoveImage(uri)} />
-        )}
-        ItemSeparatorComponent={() => <View style={{margin: 5}}></View>}
+        onContentSizeChange={() => scrollView.current.scrollToEnd()}
         showsHorizontalScrollIndicator={false}
-      />}
-   
-      <View style={styles.image}>
-            <ImageInput 
-        onChangeImage={(uri) => onAddImage(uri)} 
-      />
-        </View>
 
-    </Screen>
-  )
+      >
+        <View style={styles.container}>
+          {imageUris.map((uri) => (
+            <View key={uri} style={styles.image}>
+              <ImageInput
+                imageUri={uri}
+                onChangeImage={() => onRemoveImage(uri)}
+              />
+            </View>
+          ))}
+          <ImageInput onChangeImage={(uri) => onAddImage(uri)} />
+        </View>
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flexDirection: 'row',
+  container: {
+    flexDirection: "row",
   },
   image: {
-    flexGrow: 1, 
-    marginLeft: 10,
-   
-  }
-})
+    marginRight: 10,
+  },
+});
+

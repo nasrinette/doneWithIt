@@ -20,26 +20,14 @@ import Screen from "./app/components/Screen.js";
 import React, { useState} from 'react';
 import InputList from "./app/components/lists/ImageInputList.js";
 import ImageInputList from "./app/components/lists/ImageInputList.js";
+import ImageInputListForm from "./app/components/forms/ImageInputListForm.js";
 
 
 export default function App() {
-  const [images, setImages] = useState([]);
-  const handleAdd = (uri)=>{
-    setImages([...images, uri])
-  }
 
-  const handleRemove = uri =>{
-    setImages(images.filter(image=> image !== uri))
-  }
   return (
     <Screen style={styles.container}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ImageInputList imageUris={images} 
-        onAddImage={handleAdd}
-
-        onRemoveImage={handleRemove}
-        />
-    </View>
+        <ListingEditScreen />
     </Screen>
   );
 }
@@ -47,6 +35,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+  
   },
 });

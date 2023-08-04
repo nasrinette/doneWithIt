@@ -2,18 +2,20 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
 import * as Yup from "yup";
+import * as Location from 'expo-location'
 
 import colors from '../config/colors';
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, AppFormPicker, SubmitButton } from "../components/forms";
 import CategoryPickerItem from '../components/CategoryPickerItem';
-import PickerItem from '../components/PickerItem';
+import ImageInputListForm from '../components/forms/ImageInputListForm';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
-  category: Yup.object().required().nullable().label("Category")
+  category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().required().min(1, "Please select at least 1 image!")
 
 });
 
@@ -39,10 +41,19 @@ export default function ListingEditScreen() {
       <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
       <AppForm
-        initialValues={{ title: "", price: "", description: "", category: null,}}
+        initialValues={{ title: "", 
+        price: "", 
+        description: "", 
+        category: '', 
+        images: []}}
+
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
+     
+        <ImageInputListForm name='images' />
+
+        
         <AppFormField
           maxLength={255}
           name="title"
@@ -70,6 +81,7 @@ export default function ListingEditScreen() {
           width={300} 
           numberOfColumns={3}
           PickerItemComponent={CategoryPickerItem}
+          
           />
 
         <AppFormField
@@ -88,13 +100,12 @@ export default function ListingEditScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 15,
   },
   logo: {
     width: 80,
     height: 80,
     alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
+    marginBottom: 30,
   },
 });
