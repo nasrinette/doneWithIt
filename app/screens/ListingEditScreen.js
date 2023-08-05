@@ -2,13 +2,13 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 
 import * as Yup from "yup";
-import * as Location from 'expo-location'
 
 import colors from '../config/colors';
 import Screen from "../components/Screen";
 import { AppForm, AppFormField, AppFormPicker, SubmitButton } from "../components/forms";
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import ImageInputListForm from '../components/forms/ImageInputListForm';
+import useLocation from '../hooks/useLocation';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
@@ -36,6 +36,7 @@ const categories =[
 
 
 export default function ListingEditScreen() {
+  const location = useLocation()
    return (
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/logo-red.png")} />
@@ -47,7 +48,7 @@ export default function ListingEditScreen() {
         category: '', 
         images: []}}
 
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => console.log(location.location)}
         validationSchema={validationSchema}
       >
      
