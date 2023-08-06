@@ -21,14 +21,18 @@ import React, { useState} from 'react';
 import InputList from "./app/components/lists/ImageInputList.js";
 import ImageInputList from "./app/components/lists/ImageInputList.js";
 import ImageInputListForm from "./app/components/forms/ImageInputListForm.js";
+import { NavigationContainer } from "@react-navigation/native";
 
+import NavigationTheme from "./app/navigation/NavigationTheme.js";
+import AppNavigator from "./app/navigation/AppNavigator.js";
+import AuthNavigator from "./app/navigation/AuthNavigator.js";
 
 export default function App() {
 
   return (
-    <Screen style={styles.container}>
-        <ListingEditScreen />
-    </Screen>
+    <NavigationContainer theme={NavigationTheme}>
+      <AuthNavigator />
+    </NavigationContainer>
   );
 }
 

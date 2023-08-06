@@ -39,8 +39,6 @@ export default function ListingEditScreen() {
   const location = useLocation()
    return (
     <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-
       <AppForm
         initialValues={{ title: "", 
         price: "", 

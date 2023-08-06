@@ -3,6 +3,7 @@ import React from 'react'
 import Card from "../components/Card.js";
 import Screen from "../components/Screen.js";
 import colors from '../config/colors.js';
+import routes from '../navigation/routes.js';
 
 const listings = [
     {
@@ -28,7 +29,7 @@ const listings = [
 
 
 
-export default function ListingsScreen() {
+export default function ListingsScreen({navigation}) {
   return (
     <Screen style={styles.screen}>
     
@@ -40,6 +41,7 @@ export default function ListingsScreen() {
             title={item.title}
             subTitle={'$'+ item.price}
             image={item.image}
+            onPress={()=> navigation.navigate(routes.LISTING_DETAILS, item)}
             />
         }
         showsVerticalScrollIndicator = {false}

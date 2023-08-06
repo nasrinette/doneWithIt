@@ -26,7 +26,7 @@ export default function RegisterScreen() {
           autoCorrect={false}
           icon="account"
           name="name"
-          placeholder="Name"
+          placeholder="Nameb"
           secureTextEntry
           textContentType="name"
         />

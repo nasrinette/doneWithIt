@@ -3,6 +3,8 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { ListItem, ListItemSeparator } from "../components/lists";
 import colors from "../config/colors";
 import IconList from "../components/IconList";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import routes from "../navigation/routes";
 
 const listInfo = [
     {
@@ -15,11 +17,12 @@ const listInfo = [
       id: 2,
       text: "My Messages",
       backgroundColor: colors.secondary,
-      name: "email"
+      name: "email",
+      targetScreen: routes.MESSAGES,
     },
   ];
 
-export default function AccountScreen() {
+export default function AccountScreen({navigation}) {
 
   return (
   
@@ -28,19 +31,23 @@ export default function AccountScreen() {
         <View style={styles.lists}>
             <ListItem title='Mosh Hamedani' subTitle="programmingwithmosh@gmail.com" image={require('../assets/mosh.jpg')} />
         </View>
-
+      
         <FlatList
         style={{marginTop: 40, flexGrow:0}}
         data={listInfo}
         keyExtractor={(list) => list.id.toString()}
         renderItem={({ item }) => (
+          <TouchableOpacity onPress = {()=>{navigation.navigate(item.targetScreen)}}>
             <View style={{backgroundColor:'white'}}>
-            <IconList 
+            <IconList     
+
             name={item.name}
             backgroundColor = {item.backgroundColor}
             text={item.text} />
             </View>
-        )}
+          </TouchableOpacity>     
+        )             
+      }
         ItemSeparatorComponent={ListItemSeparator}
       />
 

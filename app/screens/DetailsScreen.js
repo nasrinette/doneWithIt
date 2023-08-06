@@ -4,13 +4,16 @@ import ListItem from "../components/lists/ListItem.js";
 import colors from "../config/colors.js";
 import { SafeAreaView } from "react-native";
 
-export default function DetailsScreen() {
+export default function DetailsScreen({route}) {
+  const listing = route.params;
+
   return (
     <View style={styles.container}>
       <Card
-        title="Red Jacket for Sale!"
-        subTitle="$100"
-        image={require("../assets/jacket.jpg")}
+        title={listing.title}
+        subTitle={'$'+listing.price}
+        image={listing.image}
+        borderRadius={0}
       />
       <ListItem
         title="Mosh Hamedani"

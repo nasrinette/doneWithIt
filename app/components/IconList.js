@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native";
 
 function IconList({
   name,
@@ -10,7 +11,7 @@ function IconList({
   text
 }) {
   return (
-    <View style={{flexDirection:'row', padding: 15 }}>
+        <View style={{flexDirection:'row', padding: 15 }}>
         <View
       style={{
         width: size,

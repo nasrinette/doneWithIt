@@ -2,14 +2,18 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import colors from '../config/colors'
 import AppText from "../components/AppText.js";
+import { TouchableWithoutFeedback } from 'react-native';
 
 
 
-export default function Card({title='title', subTitle="subtitle", image=require('../assets/jacket.jpg')}) {
+export default function Card({title='title', subTitle="subtitle", image=require('../assets/jacket.jpg'), onPress, borderRadius=20}) {
   return (
-    <View style={styles.card} >
+    <TouchableWithoutFeedback onPress={onPress}>
+        <View style={[styles.card, {borderRadius: borderRadius}]} >
         <Image      
-            style={styles.cardPic} 
+            style={[styles.cardPic, 
+                {borderTopLeftRadius: borderRadius,
+                borderTopRightRadius: borderRadius,}]} 
             source={image}
         />
         <View style={styles.cardText}>
@@ -18,6 +22,8 @@ export default function Card({title='title', subTitle="subtitle", image=require(
         </View>
         
     </View>
+    </TouchableWithoutFeedback>
+    
     
   )
 }
@@ -25,14 +31,14 @@ export default function Card({title='title', subTitle="subtitle", image=require(
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#fff',
-        borderRadius: 20,
         marginVertical: 15,
+        // borderRadius: 20,
     },
     cardPic:{
         width: '100%',
         height: 250,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        // borderTopLeftRadius: 20,
+        // borderTopRightRadius: 20,
 
     },
     subTit: {
