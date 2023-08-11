@@ -6,7 +6,7 @@ import { TouchableWithoutFeedback } from 'react-native';
 
 
 
-export default function Card({title='title', subTitle="subtitle", image=require('../assets/jacket.jpg'), onPress, borderRadius=20}) {
+export default function Card({title='title', subTitle="subtitle", imageUrl, onPress, borderRadius=20}) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
         <View style={[styles.card, {borderRadius: borderRadius}]} >
@@ -14,7 +14,7 @@ export default function Card({title='title', subTitle="subtitle", image=require(
             style={[styles.cardPic, 
                 {borderTopLeftRadius: borderRadius,
                 borderTopRightRadius: borderRadius,}]} 
-            source={image}
+            source={{uri: imageUrl}}
         />
         <View style={styles.cardText}>
             <AppText>{title}</AppText>
