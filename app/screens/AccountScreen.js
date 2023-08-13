@@ -1,76 +1,74 @@
 import React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
+
 import { ListItem, ListItemSeparator } from "../components/lists";
 import colors from "../config/colors";
-import IconList from "../components/IconList";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import Icon from "../components/Icon";
 import routes from "../navigation/routes";
+import Screen from "../components/Screen";
 
-const listInfo = [
-    {
-      id: 1,
-      text: "My Listings",
+const menuItems = [
+  {
+    title: "My Listings",
+    icon: {
+      name: "format-list-bulleted",
       backgroundColor: colors.primary,
-      name: "format-list-bulleted"
     },
-    {
-      id: 2,
-      text: "My Messages",
-      backgroundColor: colors.secondary,
+  },
+  {
+    title: "My Messages",
+    icon: {
       name: "email",
-      targetScreen: routes.MESSAGES,
+      backgroundColor: colors.secondary,
     },
-  ];
+    targetScreen: routes.MESSAGES,
+  },
+];
 
-export default function AccountScreen({navigation}) {
-
+function AccountScreen({ navigation }) {
   return (
-  
-    <View style={styles.container}>
-
-        <View style={styles.lists}>
-            <ListItem title='Mosh Hamedani' subTitle="programmingwithmosh@gmail.com" image={require('../assets/mosh.jpg')} />
-        </View>
-      
+    <Screen style={styles.screen}>
+      <View style={styles.container}>
+        <ListItem
+          title="Mosh Hamedani"
+          subTitle="programmingwithmosh@gmail.com"
+          image={require("../assets/mosh.jpg")}
+        />
+      </View>
+      <View style={styles.container}>
         <FlatList
-        style={{marginTop: 40, flexGrow:0}}
-        data={listInfo}
-        keyExtractor={(list) => list.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress = {()=>{navigation.navigate(item.targetScreen)}}>
-            <View style={{backgroundColor:'white'}}>
-            <IconList     
-
-            name={item.name}
-            backgroundColor = {item.backgroundColor}
-            text={item.text} />
-            </View>
-          </TouchableOpacity>     
-        )             
-      }
-        ItemSeparatorComponent={ListItemSeparator}
+          data={menuItems}
+          keyExtractor={(menuItem) => menuItem.title}
+          ItemSeparatorComponent={ListItemSeparator}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.title}
+              IconComponent={
+                <Icon
+                  name={item.icon.name}
+                  backgroundColor={item.icon.backgroundColor}
+                />
+              }
+              onPress={() => navigation.navigate(item.targetScreen)}
+            />
+          )}
+        />
+      </View>
+      <ListItem
+        title="Log Out"
+        IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />}
       />
-
-        <View style={styles.lists}>
-            <IconList 
-            name="logout"
-            size = {35}
-            backgroundColor = '#ffe66d'
-            text="Log Out" />
-        </View>
-    </View>
-   
-   )
+    </Screen>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.light,
-        flex: 1
-    },
-    lists: {
-        backgroundColor: colors.white,
-        marginTop: 40,
+  screen: {
+    backgroundColor: colors.light,
+  },
+  container: {
+    marginVertical: 20,
+  },
+});
 
-    }
-})
+export default AccountScreen;

@@ -1,9 +1,8 @@
-import { FlatList, StyleSheet, View, ScrollView } from 'react-native'
-import React, { useRef } from 'react'
-import ImageInput from '../ImageInput'
-import Screen from '../Screen';
+import React, { useRef } from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
+import ImageInput from "./ImageInput";
 
-export default function ImageInputList({ imageUris= [], onAddImage, onRemoveImage, ...otherProps }) {  
+function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
   const scrollView = useRef();
 
   return (
@@ -12,8 +11,6 @@ export default function ImageInputList({ imageUris= [], onAddImage, onRemoveImag
         ref={scrollView}
         horizontal
         onContentSizeChange={() => scrollView.current.scrollToEnd()}
-        showsHorizontalScrollIndicator={false}
-
       >
         <View style={styles.container}>
           {imageUris.map((uri) => (
@@ -40,3 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default ImageInputList;

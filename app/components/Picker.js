@@ -4,25 +4,32 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Modal,
+  Button,
   FlatList,
-  TouchableOpacity
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import AppText from "./AppText";
-import Screen from "./Screen";
+import Text from "./Text";
 import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
-import AppButton from "./AppButton";
-import IconList from "./IconList";
+import Screen from "./Screen";
 
-function AppPicker({ icon, items, onSelectItem, placeholder, numberOfColumns, selectedItem, width='100%', PickerItemComponent=PickerItem }) {
+function AppPicker({
+  icon,
+  items,
+  numberOfColumns = 1,
+  onSelectItem,
+  PickerItemComponent = PickerItem,
+  placeholder,
+  selectedItem,
+  width = "100%",
+}) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={[styles.container, {width: width}]}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -32,9 +39,9 @@ function AppPicker({ icon, items, onSelectItem, placeholder, numberOfColumns, se
             />
           )}
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem.label}</AppText>
+            <Text style={styles.text}>{selectedItem.label}</Text>
           ) : (
-            <AppText style={styles.placeholder}>{placeholder}</AppText>
+            <Text style={styles.placeholder}>{placeholder}</Text>
           )}
 
           <MaterialCommunityIcons
@@ -46,17 +53,15 @@ function AppPicker({ icon, items, onSelectItem, placeholder, numberOfColumns, se
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <Screen>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-          <IconList name="close" size={55} backgroundColor="white" iconColor="black" />
-          </TouchableOpacity>
+          <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
-         
             data={items}
             keyExtractor={(item) => item.value.toString()}
             numColumns={numberOfColumns}
             renderItem={({ item }) => (
               <PickerItemComponent
                 item={item}
+                label={item.label}
                 onPress={() => {
                   setModalVisible(false);
                   onSelectItem(item);
@@ -87,7 +92,6 @@ const styles = StyleSheet.create({
   },
   text: {
     flex: 1,
-    marginLeft: 8,
   },
 });
 

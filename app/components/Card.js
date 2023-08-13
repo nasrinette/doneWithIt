@@ -1,53 +1,54 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
-import colors from '../config/colors'
-import AppText from "../components/AppText.js";
-import { TouchableWithoutFeedback } from 'react-native';
+import React from "react";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { Image } from "react-native-expo-image-cache";
 
+import Text from "./Text";
+import colors from "../config/colors";
 
-
-export default function Card({title='title', subTitle="subtitle", imageUrl, onPress, borderRadius=20}) {
+function Card({ title, subTitle, imageUrl, onPress, thumbnailUrl }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-        <View style={[styles.card, {borderRadius: borderRadius}]} >
-        <Image      
-            style={[styles.cardPic, 
-                {borderTopLeftRadius: borderRadius,
-                borderTopRightRadius: borderRadius,}]} 
-            source={{uri: imageUrl}}
+      <View style={styles.card}>
+        <Image
+          style={styles.image}
+          tint="light"
+          preview={{ uri: thumbnailUrl }}
+          uri={imageUrl}
         />
-        <View style={styles.cardText}>
-            <AppText>{title}</AppText>
-            <AppText style={styles.subTit}>{subTitle}</AppText>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={styles.subTitle} numberOfLines={2}>
+            {subTitle}
+          </Text>
         </View>
-        
-    </View>
+      </View>
     </TouchableWithoutFeedback>
-    
-    
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-    card: {
-        backgroundColor: '#fff',
-        marginVertical: 15,
-        // borderRadius: 20,
-    },
-    cardPic:{
-        width: '100%',
-        height: 250,
-        // borderTopLeftRadius: 20,
-        // borderTopRightRadius: 20,
+  card: {
+    borderRadius: 15,
+    backgroundColor: colors.white,
+    marginBottom: 20,
+    overflow: "hidden",
+  },
+  detailsContainer: {
+    padding: 20,
+  },
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  subTitle: {
+    color: colors.secondary,
+    fontWeight: "bold",
+  },
+  title: {
+    marginBottom: 7,
+  },
+});
 
-    },
-    subTit: {
-      color: colors.secondary,
-      paddingTop: 5,
-
-    },
-    cardText: {
-        padding: 15,
-    }
-
-})
+export default Card;

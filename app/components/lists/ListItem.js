@@ -1,60 +1,69 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableHighlight,
-  Image,
-} from "react-native";
 import React from "react";
-import AppText from "../AppText.js";
-import colors from "../../config/colors.js";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
+import Text from "../Text";
+import colors from "../../config/colors";
 
-export default function ListItem({
-  title = "text",
-  subTitle = "subtitle",
+function ListItem({
+  title,
+  subTitle,
+  image,
+  IconComponent,
   onPress,
-  image = require("../../assets/mosh.jpg"),
+  renderRightActions,
 }) {
   return (
-    <TouchableHighlight underlayColor={colors.gray} onPress={onPress}>
-      <View style={styles.list}>
-        <Image style={styles.listPic} source={image} />
-        <View style={styles.listText}>
-          <AppText numberOfLines={1} style={styles.tit}>{title}</AppText>
-          <AppText numberOfLines={2} style={styles.subTit}>{subTitle}</AppText>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+        <View style={styles.container}>
+          {IconComponent}
+          {image && <Image style={styles.image} source={image} />}
+          <View style={styles.detailsContainer}>
+            <Text style={styles.title} numberOfLines={1}>
+              {title}
+            </Text>
+            {subTitle && (
+              <Text style={styles.subTitle} numberOfLines={2}>
+                {subTitle}
+              </Text>
+            )}
+          </View>
+          <MaterialCommunityIcons
+            color={colors.medium}
+            name="chevron-right"
+            size={25}
+          />
         </View>
-      <MaterialCommunityIcons 
-      name="chevron-right" 
-      size={25} 
-      color={colors.medium} />
-      </View>
-    </TouchableHighlight>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }
 
 const styles = StyleSheet.create({
-  list: {
+  container: {
+    alignItems: "center",
     flexDirection: "row",
-    padding: 17,
-    alignItems: 'center'
+    padding: 15,
+    backgroundColor: colors.white,
   },
-  listPic: {
-    width: 60,
-    height: 60,
-    borderRadius: 100,
-  },
-  listText: {
-    margin: 10,
+  detailsContainer: {
     flex: 1,
+    marginLeft: 10,
+    justifyContent: "center",
   },
-  tit: {
-    fontSize: 16,
+  image: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
   },
-  subTit: {
-    color: colors.gray,
-    fontSize: 14,
+  subTitle: {
+    color: colors.medium,
   },
-
+  title: {
+    fontWeight: "500",
+  },
 });
+
+export default ListItem;

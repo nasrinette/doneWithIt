@@ -1,28 +1,35 @@
-import { StyleSheet, TouchableHighlight, View } from 'react-native'
-import React from 'react'
-import colors from '../config/colors'
+import React from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TouchableWithoutFeedback } from 'react-native';
 
-export default function NewListingButton({onPress}) {
+import colors from "../config/colors";
+
+function NewListingButton({ onPress }) {
   return (
-    <TouchableHighlight underlayColor={colors.medium} style={styles.container} onPress={onPress}>    
-      <MaterialCommunityIcons style={{alignSelf: 'center'}} name='plus-circle' color={colors.light} size={35} />  
-    </TouchableHighlight>
-   
-  )
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <MaterialCommunityIcons
+          name="plus-circle"
+          color={colors.white}
+          size={40}
+        />
+      </View>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: colors.primary,
-        height: 80,
-        width: 80,
-        bottom: 25,
-        borderRadius: 40,
-        borderWidth: 10,
-        borderColor: colors.white,
-        alignContent: 'center',
-        justifyContent: 'center',
-    }
-})
+  container: {
+    alignItems: "center",
+    backgroundColor: colors.primary,
+    borderColor: colors.white,
+    borderRadius: 40,
+    borderWidth: 10,
+    bottom: 20,
+    height: 80,
+    justifyContent: "center",
+    width: 80,
+  },
+});
+
+export default NewListingButton;
